@@ -5,15 +5,26 @@ import java.util.ArrayList;
 public class Asiakas {
     private String nimi;
     private int ika;
-    private ArrayList<Varaus> varaukset;
 
     public Asiakas(String nimi, int ika) {
-        varaukset = new ArrayList<>();
         this.nimi = nimi;
         this.ika = ika;
     }
 
-    public void lisaaVaraus(Varaus varaus){
-        varaukset.add(varaus);
+
+    public String getNimi() {
+        return nimi;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+
+    public int getIka() {
+        return ika;
+    }
+
+    public void setIka(int ika) {
+        this.ika = ika;
     }
 }

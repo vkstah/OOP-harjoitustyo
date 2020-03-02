@@ -2,9 +2,9 @@ package Varausjärjestelmä;
 
 public class Elokuva {
     private String nimi;
-    private String ikaraja;
+    private int ikaraja;
 
-    public Elokuva(String nimi, String ikaraja) {
+    public Elokuva(String nimi, int ikaraja) {
         this.nimi = nimi;
         this.ikaraja = ikaraja;
     }
@@ -13,7 +13,7 @@ public class Elokuva {
         return nimi;
     }
 
-    public String getIkaraja() {
+    public int getIkaraja() {
         return ikaraja;
     }
 
