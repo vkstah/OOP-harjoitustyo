@@ -46,6 +46,15 @@ public class Jarjestelma {
     }
 
     public void lisaaSali(Sali sali) {
-        salit.add(sali);
+        boolean onkoSali = false;
+        for (Sali s: salit) {
+            if(s.annaSalinNumero() == sali.annaSalinNumero()){
+                System.out.println("sali kyseisellä numerolla on jo olemassa");
+                onkoSali = true;
+            }
+        }
+        if(!onkoSali){
+            salit.add(sali);
+        }
     }
 }
