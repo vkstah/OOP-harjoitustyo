@@ -15,16 +15,19 @@ public class Jarjestelma {
         Elokuva e = varaus.getElokuva();
 
         if (varaus.getElokuva().getIkaraja() <= varaus.getAsiakas().getIka()) {
-            Sali s = etsiSali(e);
-            if (s != null) {
-                if (s.getPaikkojenLkm() >= varaus.getVarattavienPaikkojenLkm()) {
-                    varaukset.add(varaus);
-                    s.varaaPaikka(varaus.getVarattavienPaikkojenLkm()); //ei toimi vielä
+            for (Sali s : salit) {
+                if (s != null) {
+                    if (s.getPaikkojenLkm() >= varaus.getVarattavienPaikkojenLkm()) {
+                        varaukset.add(varaus);
+                        s.varaaPaikka(varaus.getVarattavienPaikkojenLkm());
+                        System.out.println("Varaus onnistui");
+                        break;
+                    } else {
+                        System.out.println("Ei vapaita paikkoja");
+                    }
                 } else {
-                    System.out.println("Ei vapaita paikkoja");
+                    System.out.println("Ei elokuvaa missään salissa");
                 }
-            } else {
-                System.out.println("Ei elokuvaa missään salissa");
             }
         } else {
             System.out.println("liian nuori ihminen");
@@ -32,17 +35,6 @@ public class Jarjestelma {
 
     }
 
-
-
-    private Sali etsiSali(Elokuva elokuva) {
-        for (int i = 0; i < salit.size(); i++) {
-            if (salit.get(i).getElokuva().equals(elokuva)) {
-                return salit.get(i); //palautetaan ensimmäinen sali, jossa on haluttu elokuva
-            }
-        }
-
-        return null; //ei salia jossa kyseistä elokuvaa
-    }
 
     public ArrayList<Varaus> naytaVaraukset() {
         return varaukset;

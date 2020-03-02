@@ -12,6 +12,9 @@ public class Testi {
         Asiakas a = new Asiakas("Asiakas", 19);
 
         j.teeVaraus(new Varaus(a, 3, e));
+        j.teeVaraus(new Varaus(a, 3, e));
+        j.teeVaraus(new Varaus(a, 3, e));
+        j.teeVaraus(new Varaus(a, 3, e));
 
     }
 }
