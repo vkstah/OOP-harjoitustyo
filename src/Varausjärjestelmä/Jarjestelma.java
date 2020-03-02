@@ -11,35 +11,49 @@ public class Jarjestelma {
         varaukset = new ArrayList<Varaus>();
     }
 
+
+    public void muokkaaVarausta(Asiakas asiakas){
+        //toteutus
+    }
+
     public void teeVaraus(Varaus varaus) {
         Elokuva e = varaus.annaElokuva();
 
-        if (varaus.annaElokuva().getIkaraja() <= varaus.annaAsiakas().annaIka()) { //onko käyttäjä tarpeeksi vanha?
+        if (riittaakoIka(varaus)) { //onko käyttäjä tarpeeksi vanha?
             for (Sali s : salit) { //käydään läpi saleja
-                if (varaus.annaElokuva().equals(s.annaElokuva())) { //tarkastetaan onko salissa haluttu elokuva
+                if (e.equals(s.annaElokuva())) { //tarkastetaan onko salissa haluttu elokuva
                     if (s.annaVapaidenPaikkojenLkm() >= varaus.annaVarattavienPaikkojenLkm()) { //onko salissa tarpeeksi paikkoja
                         varaukset.add(varaus);
                         s.varaaPaikka(varaus.annaVarattavienPaikkojenLkm());
                         System.out.println("Varaus onnistui saliin " + s.annaNumero());
                         return;
                     } else {
-                        System.out.println("Ei vapaita paikkoja, salissa, etsitään toisesta salista");
-                        continue; //ei vapaita paikkoja salissa, etsitään elokuvaa muista saleista
+                        System.out.println("Ei vapaita paikkoja salissa, etsitään toisesta salista");
+                        //ei vapaita paikkoja salissa, etsitään elokuvaa muista saleista
                     }
                 }else {
                     System.out.println("Elokuvaa ei missään salissa");
                 }
             }
         } else {
-            System.out.println("liian nuori henkilö");
+            System.out.println("Et ole tarpeeksi vanha");
         }
-        System.out.println("varaus epäonnistui");
+        System.out.println("Varaus epäonnistui");
 
     }
 
+    private boolean riittaakoIka(Varaus varaus){
+        if(varaus.annaElokuva().annaIkaraja() <= varaus.annaAsiakas().annaIka()){
+            return true;
+        }
+        return false;
+    }
 
-    public ArrayList<Varaus> naytaVaraukset() {
-        return varaukset;
+
+    public void naytaVaraukset() {
+        for (Varaus v: varaukset) {
+            System.out.println(v.annaAsiakas().annaNimi() + " on varannut " + v.annaVarattavienPaikkojenLkm() + " paikkaa, elokuvaan " + v.annaElokuva().annaNimi() + ".");
+        }
     }
 
     public ArrayList<Sali> naytaSalit() {

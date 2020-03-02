@@ -9,11 +9,11 @@ public class Elokuva {
         this.ikaraja = ikaraja;
     }
 
-    public String getNimi() {
+    public String annaNimi() {
         return nimi;
     }
 
-    public int getIkaraja() {
+    public int annaIkaraja() {
         return ikaraja;
     }
 
