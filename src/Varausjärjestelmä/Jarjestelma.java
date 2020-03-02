@@ -20,19 +20,20 @@ public class Jarjestelma {
                     if (s.annaVapaidenPaikkojenLkm() >= varaus.annaVarattavienPaikkojenLkm()) { //onko salissa tarpeeksi paikkoja
                         varaukset.add(varaus);
                         s.varaaPaikka(varaus.annaVarattavienPaikkojenLkm());
-                        System.out.println("Varaus onnistui saliin " + s.annaSalinNumero());
-                        break;
+                        System.out.println("Varaus onnistui saliin " + s.annaNumero());
+                        return;
                     } else {
                         System.out.println("Ei vapaita paikkoja, salissa, etsitään toisesta salista");
                         continue; //ei vapaita paikkoja salissa, etsitään elokuvaa muista saleista
                     }
                 }else {
-                    System.out.println("ei vapaita paikkoja missään salissa");
+                    System.out.println("Elokuvaa ei missään salissa");
                 }
             }
         } else {
-            System.out.println("liian nuori ihminen");
+            System.out.println("liian nuori henkilö");
         }
+        System.out.println("varaus epäonnistui");
 
     }
 
@@ -48,7 +49,7 @@ public class Jarjestelma {
     public void lisaaSali(Sali sali) {
         boolean onkoSali = false;
         for (Sali s: salit) {
-            if(s.annaSalinNumero() == sali.annaSalinNumero()){
+            if(s.annaNumero() == sali.annaNumero()){
                 System.out.println("sali kyseisellä numerolla on jo olemassa");
                 onkoSali = true;
             }

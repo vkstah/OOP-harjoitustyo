@@ -1,11 +1,11 @@
 package Varausjärjestelmä;
 
 public abstract class Sali {
-    protected String salinNumero;
+    protected int salinNumero;
     protected Elokuva elokuva;
     protected int vapaidenPaikkojenLkm;
 
-    public Sali(Elokuva elokuva, int vapaidenPaikkojenLkm, String salinNumero){
+    public Sali(Elokuva elokuva, int vapaidenPaikkojenLkm, int salinNumero){
         this.salinNumero = salinNumero;
         this.elokuva = elokuva;
         this.vapaidenPaikkojenLkm = vapaidenPaikkojenLkm;
@@ -27,7 +27,7 @@ public abstract class Sali {
         vapaidenPaikkojenLkm -= lkm;
     }
 
-    public String annaSalinNumero(){
+    public int annaNumero(){
         return salinNumero;
     }
 
