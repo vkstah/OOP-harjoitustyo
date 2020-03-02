@@ -12,4 +12,8 @@ public class Asiakas {
         this.nimi = nimi;
         this.ika = ika;
     }
+    public void teeVaraus(int rivi, int sarake) {
+    	
+    }
+    
 }
