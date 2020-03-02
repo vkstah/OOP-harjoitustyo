@@ -12,19 +12,13 @@ public class Asiakas {
     }
 
 
-    public String getNimi() {
+    public String annaNimi() {
         return nimi;
     }
 
-    public void setNimi(String nimi) {
-        this.nimi = nimi;
-    }
 
-    public int getIka() {
+    public int annaIka() {
         return ika;
     }
 
-    public void setIka(int ika) {
-        this.ika = ika;
-    }
 }

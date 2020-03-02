@@ -13,27 +13,24 @@ public class Varaus {
         this.varattavienPaikkojenLkm = varattavienPaikkojenLkm;
     }
 
-    public Asiakas getAsiakas() {
+    public Asiakas annaAsiakas() {
         return asiakas;
     }
 
-    public void setAsiakas(Asiakas asiakas) {
+    public void asetaAsiakas(Asiakas asiakas) {
         this.asiakas = asiakas;
     }
 
-    public int getVarattavienPaikkojenLkm() {
+    public int annaVarattavienPaikkojenLkm() {
         return varattavienPaikkojenLkm;
     }
 
-    public void setVarattavienPaikkojenLkm(int varattavienPaikkojenLkm) {
-        this.varattavienPaikkojenLkm = varattavienPaikkojenLkm;
-    }
 
-    public Elokuva getElokuva() {
+    public Elokuva annaElokuva() {
         return elokuva;
     }
 
-    public void setElokuva(Elokuva elokuva) {
+    public void asetaElokuva(Elokuva elokuva) {
         this.elokuva = elokuva;
     }
 }
