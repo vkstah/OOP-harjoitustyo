@@ -42,12 +42,20 @@ public class Tietokanta {
             ResultSet rs  = pstmt.executeQuery();
 
             // loop through the result set
+            if(rs.next() == false){
+                System.out.println("Nimelläsi ei löydy varauksia!");
+            }
+            int varaustenLkm = 1;
             while (rs.next()) {
-                System.out.println(rs.getInt("id") +  " " +
-                        rs.getString("ASIAKKAAN_NIMI") + " " +
-                        rs.getInt("PAIKKOJEN_LKM") + " " +
-                        rs.getInt("SALI") + " " +
-                        rs.getString("ELOKUVAN_NIMI"));
+                System.out.println();
+                System.out.println("Varaus " + varaustenLkm);
+                System.out.println("VARAUSTUNNUS: " + rs.getInt("id") +  "\n" +
+                        "VARAAJA: " + rs.getString("ASIAKKAAN_NIMI") + "\n" +
+                        "VARAAMASI PAIKKOJEN MÄÄRÄ: " + rs.getInt("PAIKKOJEN_LKM") + "\n" +
+                        "SALI NUMERO: " + rs.getInt("SALI") + "\n" +
+                        "ELOKUVAN NIMI: " + rs.getString("ELOKUVAN_NIMI"));
+                System.out.println();
+                varaustenLkm++;
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

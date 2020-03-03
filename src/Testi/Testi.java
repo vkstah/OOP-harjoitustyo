@@ -3,30 +3,25 @@ package Testi;
 import Tietokanta.Tietokanta;
 import Varausjärjestelmä.*;
 
+import java.util.Scanner;
+
 public class Testi {
 
     public static void main(String[] args){
+        Scanner lukija = new Scanner(System.in);
         Tietokanta t = new Tietokanta();
+        Jarjestelma j = new Jarjestelma(t);
 
-        t.haeTietokannasta("Raw Materials");
+        Elokuva e = new Elokuva("Rambo 1", 18);
+        Elokuva ea = new Elokuva("Rambo 2", 15);
 
-        Jarjestelma j = new Jarjestelma();
-        Elokuva e = new Elokuva("Rambo", 18);
         Sali s = new Sali2D(e, 10, 3);
-        Sali se = new Sali2D(e, 12, 2);
+        Sali se = new Sali3D(ea, 4, 5);
+
         j.lisaaSali(s);
         j.lisaaSali(se);
-        Asiakas a = new Asiakas("Asiakas", 19);
-        Asiakas b = new Asiakas("Homo", 20);
 
-        j.teeVaraus(new Varaus(a, 3, e));
-        j.teeVaraus(new Varaus(a, 2, e));
-        j.teeVaraus(new Varaus(a, 5, e));
-        j.teeVaraus(new Varaus(b, 3, e));
-
-        j.naytaVaraukset("Asiakas");
-        j.naytaVaraukset("Homo");
-
-
+        Kayttoliittyma k = new Kayttoliittyma(lukija, j);
+        k.valikko();
     }
 }

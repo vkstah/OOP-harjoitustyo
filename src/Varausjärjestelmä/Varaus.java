@@ -3,9 +3,9 @@ package Varausjärjestelmä;
 public class Varaus {
     private Asiakas asiakas;
     private int varattavienPaikkojenLkm;
-    private Elokuva elokuva;
+    private String elokuva;
 
-    public Varaus(Asiakas asiakas, int varattavienPaikkojenLkm, Elokuva elokuva) {
+    public Varaus(Asiakas asiakas, int varattavienPaikkojenLkm, String elokuva) {
         this.elokuva = elokuva;
         this.asiakas = asiakas;
         this.varattavienPaikkojenLkm = varattavienPaikkojenLkm;
@@ -24,11 +24,11 @@ public class Varaus {
     }
 
 
-    public Elokuva annaElokuva() {
+    public String annaElokuva() {
         return elokuva;
     }
 
-    public void asetaElokuva(Elokuva elokuva) {
+    public void asetaElokuva(String elokuva) {
         this.elokuva = elokuva;
     }
 }

@@ -1,41 +1,53 @@
 package Varausjärjestelmä;
 
+import Tietokanta.Tietokanta;
+
 import java.util.ArrayList;
 
 public class Jarjestelma {
     private ArrayList<Sali> salit;
-    private ArrayList<Varaus> varaukset;
+    private Tietokanta varaukset;
+    private ArrayList<Elokuva> ohjelmistossa;
 
-    public Jarjestelma() {
+    public Jarjestelma(Tietokanta varaukset) {
         salit = new ArrayList<Sali>();
-        varaukset = new ArrayList<Varaus>();
+        ohjelmistossa = new ArrayList<Elokuva>();
+        this.varaukset = varaukset;
     }
 
     public void naytaVaraukset(String asiakkaanNimi) {
-        for (Varaus v : varaukset) {
-            if (v.annaAsiakas().annaNimi().equals(asiakkaanNimi)) {
-                System.out.println(v.annaAsiakas().annaNimi() + " on varannut " + v.annaVarattavienPaikkojenLkm() + " paikkaa, elokuvaan " + v.annaElokuva().annaNimi() + ".");
-            }
-        }
+        varaukset.haeTietokannasta(asiakkaanNimi);
     }
 
     public void teeVaraus(Varaus varaus) {
-        Elokuva e = varaus.annaElokuva();
+        Elokuva elokuva = null;
+        for (Elokuva e : ohjelmistossa) {
+            if (e.annaNimi().toLowerCase().equals(varaus.annaElokuva().toLowerCase())) {
+                elokuva = e;
+            }
+        }
+
+        if (elokuva == null) {
+            System.out.println("Elokuvaa ei ohjelmistossa");
+            return;
+        }
 
         if (riittaakoIka(varaus)) { //onko käyttäjä tarpeeksi vanha?
             for (Sali s : salit) { //käydään läpi saleja
-                if (e.equals(s.annaElokuva())) { //tarkastetaan onko salissa haluttu elokuva
+                if (elokuva.equals(s.annaElokuva())) { //tarkastetaan onko salissa haluttu elokuva
                     if (s.annaVapaidenPaikkojenLkm() >= varaus.annaVarattavienPaikkojenLkm()) { //onko salissa tarpeeksi paikkoja
-                        varaukset.add(varaus);
+                        varaukset.laitaTietokantaan(varaus.annaAsiakas().annaNimi(), varaus.annaVarattavienPaikkojenLkm(), s.annaNumero(), elokuva.annaNimi());
                         s.varaaPaikka(varaus.annaVarattavienPaikkojenLkm());
                         System.out.println("Varaus onnistui saliin " + s.annaNumero());
+                        System.out.println("Voit näyttää/muokata varausta nimelläsi!");
+                        System.out.println();
                         return;
                     } else {
                         System.out.println("Ei vapaita paikkoja salissa, etsitään toisesta salista");
                         //ei vapaita paikkoja salissa, etsitään elokuvaa muista saleista
                     }
                 } else {
-                    System.out.println("Elokuvaa ei missään salissa");
+                    System.out.println("Ei vapaita paikkoja");
                 }
             }
         } else {
@@ -46,7 +58,16 @@ public class Jarjestelma {
     }
 
     private boolean riittaakoIka(Varaus varaus) {
-        if (varaus.annaElokuva().annaIkaraja() <= varaus.annaAsiakas().annaIka()) {
+        Elokuva elokuva = null;
+        for (Elokuva e : ohjelmistossa) {
+            if (e.annaNimi().toLowerCase().equals(varaus.annaElokuva().toLowerCase())) {
+                elokuva = e;
+            }
+        }
+        if (elokuva == null) {
+            return false;
+        }
+        if (elokuva.annaIkaraja() <= varaus.annaAsiakas().annaIka()) {
             return true;
         }
         return false;
@@ -55,6 +76,14 @@ public class Jarjestelma {
 
     public ArrayList<Sali> naytaSalit() {
         return salit;
+    }
+
+    public void tulostaElokuvat() {
+        for (Sali s : salit) {
+            System.out.println("ELOKUVAN NIMI: " + s.annaElokuva().annaNimi() + "\n" +
+                    "IKÄRAJA: " + s.annaElokuva().annaIkaraja());
+            System.out.println();
+        }
     }
 
     public void lisaaSali(Sali sali) {
@@ -67,6 +96,9 @@ public class Jarjestelma {
         }
         if (!onkoSali) {
             salit.add(sali);
+            if (!ohjelmistossa.contains(sali.annaElokuva())) {
+                ohjelmistossa.add(sali.annaElokuva());
+            }
         }
     }
 }
