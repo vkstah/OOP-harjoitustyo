@@ -11,7 +11,6 @@ public class Jarjestelma {
         varaukset = new ArrayList<Varaus>();
     }
 
-
     public void muokkaaVarausta(Asiakas asiakas){
         //toteutus
     }
