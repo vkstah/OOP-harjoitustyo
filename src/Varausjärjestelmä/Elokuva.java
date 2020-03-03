@@ -2,18 +2,18 @@ package Varausjärjestelmä;
 
 public class Elokuva {
     private String nimi;
-    private String ikaraja;
+    private int ikaraja;
 
-    public Elokuva(String nimi, String ikaraja) {
+    public Elokuva(String nimi, int ikaraja) {
         this.nimi = nimi;
         this.ikaraja = ikaraja;
     }
 
-    public String getNimi() {
+    public String annaNimi() {
         return nimi;
     }
 
-    public String getIkaraja() {
+    public int annaIkaraja() {
         return ikaraja;
     }
 
