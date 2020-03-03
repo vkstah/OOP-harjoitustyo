@@ -1,7 +1,5 @@
 package Varausjärjestelmä;
 
-import java.util.ArrayList;
-
 public class Varaus {
     private Asiakas asiakas;
     private int varattavienPaikkojenLkm;

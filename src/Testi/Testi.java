@@ -12,13 +12,16 @@ public class Testi {
         j.lisaaSali(s);
         j.lisaaSali(se);
         Asiakas a = new Asiakas("Asiakas", 19);
+        Asiakas b = new Asiakas("Homo", 20);
 
         j.teeVaraus(new Varaus(a, 3, e));
         j.teeVaraus(new Varaus(a, 2, e));
         j.teeVaraus(new Varaus(a, 5, e));
-        j.teeVaraus(new Varaus(a, 3, e));
+        j.teeVaraus(new Varaus(b, 3, e));
 
-        j.naytaVaraukset();
+        j.naytaVaraukset("Asiakas");
+        j.naytaVaraukset("Homo");
+
 
     }
 }
