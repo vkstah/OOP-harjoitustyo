@@ -27,13 +27,16 @@ public abstract class Sali {
         return vapaidenPaikkojenLkm;
     }
 
-    public void varaaPaikka(int lkm){
-        vapaidenPaikkojenLkm -= lkm;
+    public void varaaPaikka(Sali s, Varaus varaus){
+        if (String.valueOf(s.saliId).charAt(0) == '2') {
+            s.paikat[varaus.annaRivi()][varaus.annaSarake()] = 0;
+        }
+        if (String.valueOf(s.saliId).charAt(0) == '3') {
+            paikat[varaus.annaRivi()][varaus.annaSarake()] = 0;
     }
 
     public int annaId(){
         return saliId;
     }
-
 
 }

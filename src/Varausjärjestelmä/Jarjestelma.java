@@ -27,7 +27,7 @@ public class Jarjestelma {
                 if (e.equals(s.annaElokuva())) { //tarkastetaan onko salissa haluttu elokuva
                     if (s.annaVapaidenPaikkojenLkm() >= varaus.annaVarattavienPaikkojenLkm()) { //onko salissa tarpeeksi paikkoja
                         varaukset.add(varaus);
-                        s.varaaPaikka(varaus.annaVarattavienPaikkojenLkm());
+                        s.varaaPaikka(Sali s, Varaus v);
                         System.out.println("Varaus onnistui saliin " + s.annaId());
                         return;
                     } else {
