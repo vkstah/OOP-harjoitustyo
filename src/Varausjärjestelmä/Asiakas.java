@@ -1,7 +1,5 @@
 package Varausjärjestelmä;
 
-import java.util.ArrayList;
-
 public class Asiakas {
     private String nimi;
     private int ika;
