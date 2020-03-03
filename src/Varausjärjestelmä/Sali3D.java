@@ -1,6 +1,12 @@
 package Varausjärjestelmä;
 
 public class Sali3D  extends Sali{
+	paikkojenLkm = 49;
+	public Sali3D(Elokuva elokuva, int paikkojenLkm, int salinNumero) {
+		super(elokuva, salinNumero);
+		this.paikkojenLkm = paikkojenLkm;
+	}
+	
 	paikat[][] = {
 			{1,1,1,1,1,1,1},
 			{1,1,1,1,1,1,1},
