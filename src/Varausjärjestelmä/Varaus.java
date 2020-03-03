@@ -3,11 +3,11 @@ package Varausjärjestelmä;
 import java.util.ArrayList;
 
 public class Varaus {
-    private ArrayList<Sali> salit;
     private Asiakas asiakas;
     private int varattavienPaikkojenLkm;
     private int rivi;
     private int sarake;
+    private Elokuva elokuva;
 
     public Varaus(Asiakas asiakas, int varattavienPaikkojenLkm, Elokuva elokuva, int rivi, int sarake) {
         this.elokuva = elokuva;
@@ -16,6 +16,7 @@ public class Varaus {
         this.rivi = rivi;
         this.sarake = sarake;
     }
+
     
     public Asiakas annaAsiakas() {
     	return asiakas;
@@ -47,5 +48,4 @@ public class Varaus {
     public void asetaSarake(int sarake) {
     	this.sarake = sarake;
     }
-
 }
