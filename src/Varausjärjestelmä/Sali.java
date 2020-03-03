@@ -1,16 +1,15 @@
 package Varausjärjestelmä;
 
 public abstract class Sali {
-    protected int salinNumero;
+    protected int saliId;
     protected Elokuva elokuva;
     protected int paikkojenLkm;
-    protected int salinNumero;
-    protected int paikat[][];
+    protected int[][] paikat;
     protected int vapaidenPaikkojenLkm;
     public abstract boolean onkoPaikkaVapaa();
     
-    public Sali(Elokuva elokuva, int vapaidenPaikkojenLkm, int salinNumero){
-        this.salinNumero = salinNumero;
+    public Sali(Elokuva elokuva, int vapaidenPaikkojenLkm, int saliId){
+        this.saliId = saliId;
         this.elokuva = elokuva;
         this.vapaidenPaikkojenLkm = vapaidenPaikkojenLkm;
     }
@@ -31,8 +30,8 @@ public abstract class Sali {
         vapaidenPaikkojenLkm -= lkm;
     }
 
-    public int annaNumero(){
-        return salinNumero;
+    public int annaId(){
+        return saliId;
     }
 
 
