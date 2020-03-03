@@ -1,10 +1,15 @@
 package Testi;
 
+import Tietokanta.Tietokanta;
 import Varausjärjestelmä.*;
 
 public class Testi {
 
     public static void main(String[] args){
+        Tietokanta t = new Tietokanta();
+
+        t.haeTietokannasta("Raw Materials");
+
         Jarjestelma j = new Jarjestelma();
         Elokuva e = new Elokuva("Rambo", 18);
         Sali s = new Sali2D(e, 10, 3);
