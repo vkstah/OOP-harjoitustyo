@@ -34,13 +34,13 @@ public class Varaus {
     public void asetaElokuva(Elokuva elokuva) {
     	this.elokuva = elokuva;
     }
-    public Elokuva annaRivi() {
+    public int annaRivi() {
     	return rivi;
     }
     public void asetaRivi(int rivi) {
     	this.rivi = rivi;
     }
-    public Elokuva annaSarake() {
+    public int annaSarake() {
     	return sarake;
     }
     public void asetaSarake(int sarake) {

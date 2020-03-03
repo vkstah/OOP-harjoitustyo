@@ -28,7 +28,7 @@ public class Jarjestelma {
                     if (s.annaVapaidenPaikkojenLkm() >= varaus.annaVarattavienPaikkojenLkm()) { //onko salissa tarpeeksi paikkoja
                         varaukset.add(varaus);
                         s.varaaPaikka(varaus.annaVarattavienPaikkojenLkm());
-                        System.out.println("Varaus onnistui saliin " + s.annaNumero());
+                        System.out.println("Varaus onnistui saliin " + s.annaId());
                         return;
                     } else {
                         System.out.println("Ei vapaita paikkoja salissa, etsitään toisesta salista");
@@ -60,7 +60,7 @@ public class Jarjestelma {
     public void lisaaSali(Sali sali) {
         boolean onkoSali = false;
         for (Sali s : salit) {
-            if (s.annaNumero() == sali.annaNumero()) {
+            if (s.annaId() == sali.annaId()) {
                 System.out.println("sali kyseisellä numerolla on jo olemassa");
                 onkoSali = true;
             }

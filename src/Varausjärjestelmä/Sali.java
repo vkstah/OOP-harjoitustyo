@@ -6,12 +6,13 @@ public abstract class Sali {
     protected int paikkojenLkm;
     protected int[][] paikat;
     protected int vapaidenPaikkojenLkm;
-    public abstract boolean onkoPaikkaVapaa();
+
+
+    public abstract boolean onkoPaikkaVapaa(int rivi, int sarake);
     
-    public Sali(Elokuva elokuva, int vapaidenPaikkojenLkm, int saliId){
+    public Sali(Elokuva elokuva, int saliID){
         this.saliId = saliId;
         this.elokuva = elokuva;
-        this.vapaidenPaikkojenLkm = vapaidenPaikkojenLkm;
     }
 
     public Elokuva annaElokuva() {
