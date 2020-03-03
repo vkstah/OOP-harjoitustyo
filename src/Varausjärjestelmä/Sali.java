@@ -5,5 +5,5 @@ public abstract class Sali {
     protected int paikat[][];
     public abstract boolean onkoPaikkaVapaa();
     
-
+    
 }
