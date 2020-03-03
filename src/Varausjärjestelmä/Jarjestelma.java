@@ -11,8 +11,12 @@ public class Jarjestelma {
         varaukset = new ArrayList<Varaus>();
     }
 
-    public void muokkaaVarausta(Asiakas asiakas){
-        //toteutus
+    public void naytaVaraukset(String asiakkaanNimi) {
+        for (Varaus v : varaukset) {
+            if (v.annaAsiakas().annaNimi().equals(asiakkaanNimi)) {
+                System.out.println(v.annaAsiakas().annaNimi() + " on varannut " + v.annaVarattavienPaikkojenLkm() + " paikkaa, elokuvaan " + v.annaElokuva().annaNimi() + ".");
+            }
+        }
     }
 
     public void teeVaraus(Varaus varaus) {
@@ -30,7 +34,7 @@ public class Jarjestelma {
                         System.out.println("Ei vapaita paikkoja salissa, etsitään toisesta salista");
                         //ei vapaita paikkoja salissa, etsitään elokuvaa muista saleista
                     }
-                }else {
+                } else {
                     System.out.println("Elokuvaa ei missään salissa");
                 }
             }
@@ -41,19 +45,13 @@ public class Jarjestelma {
 
     }
 
-    private boolean riittaakoIka(Varaus varaus){
-        if(varaus.annaElokuva().annaIkaraja() <= varaus.annaAsiakas().annaIka()){
+    private boolean riittaakoIka(Varaus varaus) {
+        if (varaus.annaElokuva().annaIkaraja() <= varaus.annaAsiakas().annaIka()) {
             return true;
         }
         return false;
     }
 
-
-    public void naytaVaraukset() {
-        for (Varaus v: varaukset) {
-            System.out.println(v.annaAsiakas().annaNimi() + " on varannut " + v.annaVarattavienPaikkojenLkm() + " paikkaa, elokuvaan " + v.annaElokuva().annaNimi() + ".");
-        }
-    }
 
     public ArrayList<Sali> naytaSalit() {
         return salit;
@@ -61,13 +59,13 @@ public class Jarjestelma {
 
     public void lisaaSali(Sali sali) {
         boolean onkoSali = false;
-        for (Sali s: salit) {
-            if(s.annaNumero() == sali.annaNumero()){
+        for (Sali s : salit) {
+            if (s.annaNumero() == sali.annaNumero()) {
                 System.out.println("sali kyseisellä numerolla on jo olemassa");
                 onkoSali = true;
             }
         }
-        if(!onkoSali){
+        if (!onkoSali) {
             salit.add(sali);
         }
     }
