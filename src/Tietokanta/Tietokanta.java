@@ -42,9 +42,7 @@ public class Tietokanta {
             ResultSet rs  = pstmt.executeQuery();
 
             // loop through the result set
-            if(rs.next() == false){
-                System.out.println("Nimelläsi ei löydy varauksia!");
-            }
+
             int varaustenLkm = 1;
             while (rs.next()) {
                 System.out.println();
@@ -57,6 +55,55 @@ public class Tietokanta {
                 System.out.println();
                 varaustenLkm++;
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public int haeSalinumero(int varausTunnus) {
+        String sql = "SELECT SALI FROM varaukset WHERE ID = ?";
+
+        return haeArvoja(varausTunnus, sql);
+    }
+
+    public int haePaikat(int varausTunnus) {
+        String sql = "SELECT PAIKKOJEN_LKM FROM varaukset WHERE ID = ?";
+
+        return haeArvoja(varausTunnus, sql);
+    }
+
+    private int haeArvoja(int varausTunnus, String sql) {
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt  = conn.prepareStatement(sql)){
+
+            // set the value
+            pstmt.setInt(1,varausTunnus);
+            //
+            ResultSet rs  = pstmt.executeQuery();
+
+            // loop through the result set
+
+            while (rs.next()) {
+                return rs.getInt("SALI");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return 0;
+    }
+
+    public void poistaTietokannasta(int varaustunnus, String asiakkaanNimi) {
+        String sql = "DELETE FROM varaukset WHERE ID = ? AND ASIAKKAAN_NIMI = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // set the corresponding param
+            pstmt.setInt(1, varaustunnus);
+            pstmt.setString(2, asiakkaanNimi);
+            // execute the delete statement
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

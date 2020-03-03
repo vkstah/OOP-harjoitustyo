@@ -19,6 +19,20 @@ public class Jarjestelma {
         varaukset.haeTietokannasta(asiakkaanNimi);
     }
 
+    public void poistaVaraus(int varausTunnus, String asiakkaanNimi){
+        varaukset.poistaTietokannasta(varausTunnus, asiakkaanNimi);
+        for (Sali s: salit) {
+            if(s.annaNumero() == varaukset.haeSalinumero(varausTunnus)){
+                vapautaPaikkoja(s, varaukset.haePaikat(varausTunnus));
+                break;
+            }
+        }
+
+        System.out.println("Varaus poistettiin onnistuneesti!");
+
+    }
+
+
     public void teeVaraus(Varaus varaus) {
         Elokuva elokuva = null;
         for (Elokuva e : ohjelmistossa) {
@@ -37,18 +51,18 @@ public class Jarjestelma {
                 if (elokuva.equals(s.annaElokuva())) { //tarkastetaan onko salissa haluttu elokuva
                     if (s.annaVapaidenPaikkojenLkm() >= varaus.annaVarattavienPaikkojenLkm()) { //onko salissa tarpeeksi paikkoja
                         varaukset.laitaTietokantaan(varaus.annaAsiakas().annaNimi(), varaus.annaVarattavienPaikkojenLkm(), s.annaNumero(), elokuva.annaNimi());
-                        s.varaaPaikka(varaus.annaVarattavienPaikkojenLkm());
+                        varaaPaikkoja(s, varaus.annaVarattavienPaikkojenLkm());
                         System.out.println("Varaus onnistui saliin " + s.annaNumero());
-                        System.out.println("Voit näyttää/muokata varausta nimelläsi!");
+                        System.out.println("Voit näyttää varauksesi nimelläsi!");
                         System.out.println();
                         return;
                     } else {
                         System.out.println("Ei vapaita paikkoja salissa, etsitään toisesta salista");
                         //ei vapaita paikkoja salissa, etsitään elokuvaa muista saleista
                     }
-                } else {
+                } /*else {
                     System.out.println("Ei vapaita paikkoja");
-                }
+                }*/
             }
         } else {
             System.out.println("Et ole tarpeeksi vanha");
@@ -100,5 +114,12 @@ public class Jarjestelma {
                 ohjelmistossa.add(sali.annaElokuva());
             }
         }
+    }
+
+    private void varaaPaikkoja(Sali sali, int maara){
+        sali.varaaPaikka(maara);
+    }
+    private void vapautaPaikkoja(Sali sali, int maara){
+        sali.vapautaPaikka(maara);
     }
 }

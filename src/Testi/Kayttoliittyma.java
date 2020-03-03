@@ -22,11 +22,11 @@ public class Kayttoliittyma {
         int valinta;
         String syote;
         System.out.println("Tervetuloa elokuva lippujen varausjärjestelmään!");
-        while(true) {
+        while (true) {
             System.out.println("Mitä haluat tehdä?");
             System.out.println("1. Näytä varaukseni");
             System.out.println("2. Tee varaus");
-            System.out.println("3. Muuta varausta");
+            System.out.println("3. Poista varaus");
             System.out.println("4. Näytä ohjelmistossa olevat elokuvat");
             System.out.println("5. Poistu");
 
@@ -52,7 +52,11 @@ public class Kayttoliittyma {
                         jarjestelma.teeVaraus(varaus);
                         break;
                     case 3:
-
+                        System.out.println("Syötä nimesi: ");
+                        String nimi = lukija.nextLine();
+                        System.out.println("Syötä varaustunnuksesi: ");
+                        int varausTunnus = Integer.parseInt(lukija.nextLine());
+                        jarjestelma.poistaVaraus(varausTunnus, nimi.toLowerCase());
                         break;
                     case 4:
                         jarjestelma.tulostaElokuvat();
@@ -62,7 +66,7 @@ public class Kayttoliittyma {
                     default:
                         break;
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Virhe! Yritä uudelleen!");
             }
 

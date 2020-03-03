@@ -26,6 +26,9 @@ public abstract class Sali {
     public void varaaPaikka(int lkm){
         vapaidenPaikkojenLkm -= lkm;
     }
+    public void vapautaPaikka(int lkm){
+        vapaidenPaikkojenLkm += lkm;
+    }
 
     public int annaNumero(){
         return salinNumero;
