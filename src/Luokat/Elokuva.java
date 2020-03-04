@@ -1,4 +1,4 @@
-package Varausjärjestelmä;
+package Luokat;
 
 public class Elokuva {
     private String nimi;

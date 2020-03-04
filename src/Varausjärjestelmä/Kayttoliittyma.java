@@ -1,15 +1,12 @@
-package Testi;
+package Varausjärjestelmä;
 
-import Tietokanta.Tietokanta;
-import Varausjärjestelmä.Asiakas;
-import Varausjärjestelmä.Elokuva;
-import Varausjärjestelmä.Jarjestelma;
-import Varausjärjestelmä.Varaus;
+import Luokat.Asiakas;
+import Luokat.Jarjestelma;
+import Luokat.Varaus;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
-public class Kayttoliittyma {
+class Kayttoliittyma {
     private Scanner lukija;
     private Jarjestelma jarjestelma;
 

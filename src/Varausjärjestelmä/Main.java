@@ -1,11 +1,11 @@
-package Testi;
+package Varausjärjestelmä;
 
 import Tietokanta.Tietokanta;
-import Varausjärjestelmä.*;
+import Luokat.*;
 
 import java.util.Scanner;
 
-public class Testi {
+public class Main {
 
     public static void main(String[] args){
         Scanner lukija = new Scanner(System.in);

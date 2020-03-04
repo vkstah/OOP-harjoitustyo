@@ -1,8 +1,8 @@
-package Varausjärjestelmä;
+package Luokat;
 
 public abstract class Sali {
-    protected int salinNumero;
-    protected Elokuva elokuva;
+    private int salinNumero;
+    private Elokuva elokuva;
     protected int vapaidenPaikkojenLkm;
 
     public Sali(Elokuva elokuva, int vapaidenPaikkojenLkm, int salinNumero){
@@ -23,12 +23,8 @@ public abstract class Sali {
         return vapaidenPaikkojenLkm;
     }
 
-    public void varaaPaikka(int lkm){
-        vapaidenPaikkojenLkm -= lkm;
-    }
-    public void vapautaPaikka(int lkm){
-        vapaidenPaikkojenLkm += lkm;
-    }
+    public abstract void varaaPaikka(int lkm);
+    public abstract void vapautaPaikka(int lkm);
 
     public int annaNumero(){
         return salinNumero;
