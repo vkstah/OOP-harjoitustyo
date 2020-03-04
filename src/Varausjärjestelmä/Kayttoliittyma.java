@@ -65,6 +65,7 @@ class Kayttoliittyma {
                 }
             } catch (Exception e) {
                 System.out.println("Virhe! Yritä uudelleen!");
+                System.out.println();
             }
 
 
