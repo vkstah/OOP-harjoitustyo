@@ -14,18 +14,22 @@ class Kayttoliittyma {
         this.lukija = lukija;
         this.jarjestelma = jarjestelma;
     }
+    private void paaValikko(){
+        System.out.println("Mitä haluat tehdä?");
+        System.out.println("1. Näytä varaukseni");
+        System.out.println("2. Tee varaus");
+        System.out.println("3. Poista varaus");
+        System.out.println("4. Näytä ohjelmistossa olevat elokuvat");
+        System.out.println("5. Poistu");
+    }
+
 
     public void valikko() {
         int valinta;
         String syote;
         System.out.println("Tervetuloa elokuva lippujen varausjärjestelmään!");
         while (true) {
-            System.out.println("Mitä haluat tehdä?");
-            System.out.println("1. Näytä varaukseni");
-            System.out.println("2. Tee varaus");
-            System.out.println("3. Poista varaus");
-            System.out.println("4. Näytä ohjelmistossa olevat elokuvat");
-            System.out.println("5. Poistu");
+            paaValikko();
 
             try {
                 valinta = Integer.parseInt(lukija.nextLine());

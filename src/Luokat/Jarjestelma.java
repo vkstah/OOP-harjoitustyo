@@ -7,11 +7,11 @@ import java.util.ArrayList;
 public class Jarjestelma {
     //private ArrayList<Sali> salit;
     private Tietokanta tietokanta;
-    private ArrayList<Elokuva> ohjelmistossa;
+    //private ArrayList<Elokuva> ohjelmistossa;
 
     public Jarjestelma(Tietokanta tietokanta) {
         //salit = new ArrayList<Sali>();
-        ohjelmistossa = new ArrayList<Elokuva>();
+        //ohjelmistossa = new ArrayList<Elokuva>();
         this.tietokanta = tietokanta;
     }
 
@@ -24,7 +24,7 @@ public class Jarjestelma {
         int varatutPaikat = tietokanta.haePaikat(varausTunnus);
 
 
-        if(!tietokanta.onkoVarausta(varausTunnus, asiakkaanNimi)){
+        if (!tietokanta.onkoVarausta(varausTunnus, asiakkaanNimi)) {
             System.out.println("Tiedoillasi ei löytynyt varausta.");
             System.out.println();
             return;
@@ -44,7 +44,7 @@ public class Jarjestelma {
 
     }
 
-    private Elokuva annaElokuva(Varaus varaus) {
+/*    private Elokuva annaElokuva(Varaus varaus) {
         Elokuva elokuva = null;
         for (Elokuva e : ohjelmistossa) {
             if (e.annaNimi().toLowerCase().equals(varaus.annaElokuva().toLowerCase())) {
@@ -52,19 +52,18 @@ public class Jarjestelma {
             }
         }
 
+
         return elokuva;
-    }
+    }*/
 
-    public void laitaElokuvaSaliin(Sali sali, Elokuva elokuva){
-        tietokanta.asetaElokuva(sali.annaNumero(), elokuva.annaNimi());
+    public void laitaElokuvaSaliin(Sali sali, Elokuva elokuva) {
+        tietokanta.asetaElokuvaSaliin(sali.annaNumero(), elokuva.annaNimi());
     }
-
 
 
     public void teeVaraus(Varaus varaus) {
 
-        Elokuva elokuva = annaElokuva(varaus);
-
+        Elokuva elokuva = tietokanta.annaElokuva(varaus.annaElokuva());
         if (elokuva == null) {
             System.out.println("Elokuvaa ei ohjelmistossa.");
             System.out.println();
@@ -72,12 +71,12 @@ public class Jarjestelma {
         }
 
         if (riittaakoIka(varaus)) { //onko käyttäjä tarpeeksi vanha?
-            if (tietokanta.annaSalitJoissaElokuva(elokuva.annaNimi()).isEmpty()) {
+            if (tietokanta.annaSaliNumeroJoissaElokuva(elokuva.annaNimi()).isEmpty()) {
                 System.out.println("Elokuvaa ei missään salissa.");
                 System.out.println();
                 return;
             }
-            for (int i : tietokanta.annaSalitJoissaElokuva(elokuva.annaNimi())) { //käydään läpi saleja
+            for (int i : tietokanta.annaSaliNumeroJoissaElokuva(elokuva.annaNimi())) { //käydään läpi saleja
                 if (tietokanta.annaVapaatPaikat(i) >= varaus.annaVarattavienPaikkojenLkm()) { //onko salissa tarpeeksi paikkoja
                     tietokanta.teeVaraus(varaus.annaAsiakas().annaNimi(), varaus.annaVarattavienPaikkojenLkm(), i, elokuva.annaNimi());
                     varaaPaikkoja(i, varaus.annaVarattavienPaikkojenLkm());
@@ -98,12 +97,9 @@ public class Jarjestelma {
     }
 
     private boolean riittaakoIka(Varaus varaus) {
-        Elokuva elokuva = null;
-        for (Elokuva e : ohjelmistossa) {
-            if (e.annaNimi().toLowerCase().equals(varaus.annaElokuva().toLowerCase())) {
-                elokuva = e;
-            }
-        }
+        Elokuva elokuva = tietokanta.annaElokuva(varaus.annaElokuva());
+
+
         if (elokuva == null) {
             return false;
         }
@@ -115,15 +111,14 @@ public class Jarjestelma {
 
 
     public void tulostaElokuvat() {
-        for (String s: tietokanta.annaKaikkiElokuvat()) {
-            for (Elokuva e: ohjelmistossa) {
-                if(e.annaNimi().equals(s)){
-                    System.out.println("ELOKUVAN NIMI: " + s + "\n" +
-                            "IKÄRAJA: " + e.annaIkaraja());
-                    System.out.println();
-                }
-            }
+        ArrayList<Elokuva> elokuvat = tietokanta.annaKaikkiElokuvat();
+
+        for (Elokuva e : elokuvat) {
+            System.out.println("ELOKUVAN NIMI: " + e.annaNimi() + "\n" +
+                    "IKÄRAJA: " + e.annaIkaraja());
+            System.out.println();
         }
+
 /*        for (Sali s : salit) {
             System.out.println("ELOKUVAN NIMI: " + s.annaElokuva().annaNimi() + "\n" +
                     "IKÄRAJA: " + s.annaElokuva().annaIkaraja());
@@ -133,21 +128,16 @@ public class Jarjestelma {
 
     public void lisaaSali(Sali sali) {
         boolean onkoSali = false;
-        boolean onkoElokuva = false;
         int saliNumero = tietokanta.annaSali(sali.annaNumero());
         if (saliNumero == sali.annaNumero()) {
             //System.out.println("Sali kyseisellä numerolla on jo olemassa!");
             onkoSali = true;
         }
 
-        for (int i = 0; i < ohjelmistossa.size(); i++) {
-            if(ohjelmistossa.get(i).annaNimi().equals(tietokanta.annaElokuva(saliNumero))){
-                onkoElokuva = true;
-            }
+        if (!tietokanta.onkoElokuva(sali.annaElokuva().annaNimi())) {
+            tietokanta.lisaaElokuva(sali.annaElokuva().annaNimi(), sali.annaElokuva().annaIkaraja());
         }
-        if (!onkoElokuva) {
-            ohjelmistossa.add(sali.annaElokuva());
-        }
+
         if (!onkoSali) {
             tietokanta.lisaaSali(sali.annaNumero(), sali.annaVapaidenPaikkojenLkm(), sali.annaElokuva().annaNimi());
         }

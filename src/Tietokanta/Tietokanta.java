@@ -1,7 +1,6 @@
 package Tietokanta;
 
-import Luokat.Sali;
-
+import Luokat.Elokuva;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -19,8 +18,93 @@ public class Tietokanta {
             yhteys = DriverManager.getConnection(osoite);
         } catch (SQLException e) {
             //System.out.println(e.getMessage());
+            System.out.println(virhe);
         }
         return yhteys;
+    }
+
+    //ELOKUVAT
+    public Elokuva annaElokuva(String nimi) {
+        String sql = "SELECT * FROM elokuvat WHERE LOWER(ELOKUVA) = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nimi);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                return new Elokuva(rs.getString("ELOKUVA"), rs.getInt("IKARAJA"));
+            }
+
+        } catch (SQLException e) {
+            //System.out.println(e.getMessage());
+            System.out.println(virhe);
+        }
+
+        return null;
+    }
+
+
+    public void lisaaElokuva(String nimi, int ikaraja) {
+        String sql = "INSERT INTO elokuvat(ELOKUVA, IKARAJA) VALUES(?,?)";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, nimi);
+            pstmt.setInt(2, ikaraja);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            //System.out.println(e.getMessage());
+            System.out.println(virhe);
+        }
+
+    }
+
+    public boolean onkoElokuva(String nimi) {
+        String sql = "SELECT ELOKUVA FROM elokuvat WHERE ELOKUVA = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, nimi);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+
+
+        } catch (SQLException e) {
+            //System.out.println(e.getMessage());
+            System.out.println(virhe);
+        }
+
+        return false;
+    }
+
+    public ArrayList<Elokuva> annaKaikkiElokuvat() {
+        ArrayList<Elokuva> palautus = new ArrayList<>();
+        String sql = "SELECT DISTINCT ELOKUVA, IKARAJA FROM elokuvat";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = pstmt.executeQuery();
+
+
+            while (rs.next()) {
+                palautus.add(new Elokuva(rs.getString("ELOKUVA"), rs.getInt("IKARAJA")));
+            }
+
+        } catch (SQLException e) {
+            //System.out.println(e.getMessage());
+            System.out.println(virhe);
+        }
+
+        return palautus;
     }
 
     //SALIT
@@ -38,29 +122,6 @@ public class Tietokanta {
             System.out.println(virhe);
         }
 
-    }
-
-    public String annaElokuva(int saliNumero) {
-        String sql = "SELECT ELOKUVA FROM salit WHERE SALI_NUMERO = ?";
-
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setInt(1, saliNumero);
-
-            ResultSet rs = pstmt.executeQuery();
-
-
-            while (rs.next()) {
-                return rs.getString("ELOKUVA");
-            }
-
-        } catch (SQLException e) {
-            //System.out.println(e.getMessage());
-            System.out.println(virhe);
-        }
-
-        return null;
     }
 
     public int annaVapaatPaikat(int saliNumero) {
@@ -83,7 +144,7 @@ public class Tietokanta {
         return 0;
     }
 
-    public ArrayList<Integer> annaSalitJoissaElokuva(String elokuva) {
+    public ArrayList<Integer> annaSaliNumeroJoissaElokuva(String elokuva) {
         String sql = "SELECT SALI_NUMERO FROM salit WHERE ELOKUVA = ?";
         ArrayList<Integer> palautus = new ArrayList<>();
 
@@ -104,29 +165,8 @@ public class Tietokanta {
         return palautus;
     }
 
-    public ArrayList<String> annaKaikkiElokuvat() {
-        ArrayList<String> palautus = new ArrayList<>();
-        String sql = "SELECT DISTINCT ELOKUVA FROM salit";
 
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            ResultSet rs = pstmt.executeQuery();
-
-
-            while (rs.next()) {
-                palautus.add(rs.getString("ELOKUVA"));
-            }
-
-        } catch (SQLException e) {
-            //System.out.println(e.getMessage());
-            System.out.println(virhe);
-        }
-
-        return palautus;
-    }
-
-    public void asetaElokuva(int saliNumero, String elokuva){
+    public void asetaElokuvaSaliin(int saliNumero, String elokuva) {
         String sql = "UPDATE salit SET ELOKUVA = ? WHERE SALI_NUMERO = ?";
 
         try (Connection conn = this.connect();
@@ -284,7 +324,7 @@ public class Tietokanta {
 
             ResultSet rs = pstmt.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                 return true;
             }
 
