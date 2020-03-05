@@ -6,7 +6,6 @@ public class Sali3D  extends Sali{
         super(elokuva, paikkojenLkm, salinNumero);
     }
 
-    //3D salissa 2 paikkaa/henkilö
     public void varaaPaikka(int lkm){
         vapaidenPaikkojenLkm -= 2*lkm;
     }

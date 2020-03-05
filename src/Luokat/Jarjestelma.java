@@ -128,7 +128,10 @@ public class Jarjestelma {
 
     public void lisaaSali(Sali sali) {
         boolean onkoSali = false;
-        int saliNumero = tietokanta.annaSali(sali.annaNumero());
+        int saliNumero = 0;
+        if(tietokanta.annaSali(sali.annaNumero()) != null) {
+            saliNumero = tietokanta.annaSali(sali.annaNumero()).annaNumero();
+        }
         if (saliNumero == sali.annaNumero()) {
             //System.out.println("Sali kyseisellä numerolla on jo olemassa!");
             onkoSali = true;
@@ -144,11 +147,19 @@ public class Jarjestelma {
     }
 
     private void varaaPaikkoja(int sali, int maara) {
+        if(String.valueOf(sali).charAt(0) == '3'){ //3D salissa 2paikkaa/henkilö
+            tietokanta.lisaaPaikkoja(sali, 2*(-maara));
+        }else {
+            tietokanta.lisaaPaikkoja(sali, -maara);
+        }
 
-        tietokanta.lisaaPaikkoja(sali, -maara);
     }
 
     private void vapautaPaikkoja(int sali, int maara) {
-        tietokanta.lisaaPaikkoja(sali, maara);
+        if(String.valueOf(sali).charAt(0) == '3'){  //3D salissa 2paikkaa/henkilö
+            tietokanta.lisaaPaikkoja(sali, 2*(maara));
+        }else{
+            tietokanta.lisaaPaikkoja(sali, maara);
+        }
     }
 }

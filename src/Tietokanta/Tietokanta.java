@@ -1,6 +1,9 @@
 package Tietokanta;
 
 import Luokat.Elokuva;
+import Luokat.Sali;
+import Luokat.Sali2D;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -186,8 +189,8 @@ public class Tietokanta {
         yhdista(saliNumero, lisattaviaPaikkoja, sql);
     }
 
-    public int annaSali(int saliNumero) {
-        String sql = "SELECT SALI_NUMERO FROM salit WHERE SALI_NUMERO = ?";
+    public Sali annaSali(int saliNumero) {
+        String sql = "SELECT * FROM salit, elokuvat WHERE SALI_NUMERO = ? AND salit.ELOKUVA = elokuvat.ELOKUVA";
 
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -199,7 +202,14 @@ public class Tietokanta {
 
 
             while (rs.next()) {
-                return rs.getInt("SALI_NUMERO");
+                Elokuva elokuva = new Elokuva(rs.getString("ELOKUVA"), rs.getInt("IKARAJA"));
+                if(String.valueOf(rs.getInt("SALI_NUMERO")).charAt(0) == '2'){ //2Dsali
+                    return new Sali2D(elokuva, rs.getInt("PAIKAT"), rs.getInt("SALI_NUMERO"));
+                }
+
+                if(String.valueOf(rs.getInt("SALI_NUMERO")).charAt(0) == '3'){ //3Dsali
+                    return new Sali2D(elokuva, rs.getInt("PAIKAT"), rs.getInt("SALI_NUMERO"));
+                }
             }
 
 
@@ -208,7 +218,7 @@ public class Tietokanta {
             System.out.println(virhe);
         }
 
-        return 0;
+        return null;
     }
 
     private void yhdista(int saliNumero, int lisattaviaPaikkoja, String sql) {

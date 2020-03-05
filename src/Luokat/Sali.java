@@ -15,9 +15,6 @@ public abstract class Sali {
         return elokuva;
     }
 
-    public void asetaElokuva(Elokuva elokuva) {
-        this.elokuva = elokuva;
-    }
 
     public int annaVapaidenPaikkojenLkm() {
         return vapaidenPaikkojenLkm;

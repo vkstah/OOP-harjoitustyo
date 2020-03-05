@@ -15,9 +15,6 @@ public class Varaus {
         return asiakas;
     }
 
-    public void asetaAsiakas(Asiakas asiakas) {
-        this.asiakas = asiakas;
-    }
 
     public int annaVarattavienPaikkojenLkm() {
         return varattavienPaikkojenLkm;
@@ -28,7 +25,5 @@ public class Varaus {
         return elokuva;
     }
 
-    public void asetaElokuva(String elokuva) {
-        this.elokuva = elokuva;
-    }
+
 }

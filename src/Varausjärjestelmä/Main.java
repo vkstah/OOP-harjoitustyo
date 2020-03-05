@@ -17,7 +17,7 @@ public class Main {
         Elokuva jb = new Elokuva("James Bond", 12);
 
         Sali sali1 = new Sali2D(rambo, 100, 20);
-        Sali sali2 = new Sali3D(rambo, 40, 30);
+        Sali sali2 = new Sali3D(rambo2, 40, 30);
         Sali sali3 = new Sali2D(jb, 15, 21);
 
 
