@@ -281,16 +281,6 @@ public class Tietokanta {
     public int haeSalinumero(int varausTunnus) {
         String sql = "SELECT SALI FROM varaukset WHERE ID = ?";
 
-        return haeArvoja(varausTunnus, sql, "SALI");
-    }
-
-    public int haePaikat(int varausTunnus) {
-        String sql = "SELECT PAIKKOJEN_LKM FROM varaukset WHERE ID = ?";
-
-        return haeArvoja(varausTunnus, sql, "PAIKKOJEN_LKM");
-    }
-
-    private int haeArvoja(int varausTunnus, String sql, String sarake) {
         try (Connection conn = this.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -300,7 +290,7 @@ public class Tietokanta {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
 
-                return rs.getInt(sarake);
+                return rs.getInt("SALI");
 
             }
 
@@ -312,6 +302,34 @@ public class Tietokanta {
 
         return 0;
     }
+
+    public int haePaikat(int varausTunnus) {
+        String sql = "SELECT PAIKKOJEN_LKM FROM varaukset WHERE ID = ?";
+
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+
+            pstmt.setInt(1, varausTunnus);
+
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+
+                return rs.getInt("PAIKKOJEN_LKM");
+
+            }
+
+
+        } catch (SQLException e) {
+            //System.out.println(e.getMessage());
+            System.out.println(virhe);
+        }
+
+        return 0;
+
+    }
+
+
 
     public boolean onkoVarausta(int varaustunnus, String asiakkaanNimi) {
         String sql = "SELECT 1 FROM varaukset WHERE ID = ? AND ASIAKKAAN_NIMI = ?";
