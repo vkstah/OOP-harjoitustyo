@@ -3,6 +3,7 @@ package Tietokanta;
 import Luokat.Elokuva;
 import Luokat.Sali;
 import Luokat.Sali2D;
+import Luokat.Sali3D;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -208,7 +209,7 @@ public class Tietokanta {
                 }
 
                 if(String.valueOf(rs.getInt("SALI_NUMERO")).charAt(0) == '3'){ //3Dsali
-                    return new Sali2D(elokuva, rs.getInt("PAIKAT"), rs.getInt("SALI_NUMERO"));
+                    return new Sali3D(elokuva, rs.getInt("PAIKAT"), rs.getInt("SALI_NUMERO"));
                 }
             }
 
