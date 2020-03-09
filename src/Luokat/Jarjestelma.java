@@ -154,7 +154,6 @@ public class Jarjestelma {
         }
 
     }
-
     private void vapautaPaikkoja(int sali, int maara) {
         if(String.valueOf(sali).charAt(0) == '3'){  //3D salissa 2paikkaa/henkilö
             tietokanta.lisaaPaikkoja(sali, 2*(maara));
