@@ -1,7 +1,7 @@
 Ohjelman käynnistyttyä valitset mitä haluat tehdä varausjärjestelmässä:
-1) Näytä varaukseni: tällä ominaisuudella voit nähdä tietyllä nimellä varattujen paikkojen määrät eri elokuvista ja mistä saleista paikat on varattu.
+1) Näytä varaukseni: tällä ominaisuudella voit nähdä tietyllä nimellä varattujen paikkojen määrät eri elokuvista ja mistä saleista paikat on varattu. Näet myös varausnumerosi.
 2) Tee varaus: voit luoda varauksen. Järjestelmä kysyy nimeäsi, ikääsi, elokuvan nimeä ja montako paikkaa haluat varata.
-3) Poista varaus: voit poistaa nimelläsi tehtyjä varauksia tietokannasta.
+3) Poista varaus: voit poistaa nimelläsi tehtyjä varauksia tietokannasta. Poistamiseen tarvitset varausnumeron ja nimelläsi.
 4) Näytä ohjelmistossa olevat elokuvat: näyttää elokuvat, joihin voi tehdä varauksen, sekä niiden ikärajat.
 5) Poistu: sulkee ohjelman.
 
