@@ -1,8 +1,15 @@
-Ohjelma pitäisi pystyä ajamaan, ajamalla main-metodi (src/Varausjärjsetelmä/Main.java). 
+Ohjelman käynnistyttyä valitset mitä haluat tehdä varausjärjestelmässä:
+1) Näytä varaukseni: tällä ominaisuudella voit nähdä tietyllä nimellä varattujen paikkojen määrät eri elokuvista ja mistä saleista paikat on varattu.
+2) Tee varaus: voit luoda varauksen. Järjestelmä kysyy nimeäsi, ikääsi, elokuvan nimeä ja montako paikkaa haluat varata.
+3) Poista varaus: voit poistaa nimelläsi tehtyjä varauksia tietokannasta.
+4) Näytä ohjelmistossa olevat elokuvat: näyttää elokuvat, joihin voi tehdä varauksen, sekä niiden ikärajat.
+5) Poistu: sulkee ohjelman.
 
-Jos kääntäjä antaa nullpointerexception poikkeuksen, pitää projektiin asettaa Sqlite-kirjasto(lib/sqlite-jdbc-3.30.1.jar) IDE:ssä.
+Ohjeistusta:
 
-IntelliJ:ssa tämä onnistuu painamalla valikosta File | Project Structure -> Libraries, jossa painetaan "+", jonka jälkeen annetaan kirjaston polku.
+Ohjelma toimii ajamalla main-metodi (src/Varausjärjsetelmä/Main.java).
 
-Eclipsessä klikataan hiiren oikealla näppäimellä projectia ja painetaan kohtaa jossa lukee "Select Build Path". 
-Tämän jälkeen painetaan "Configure Build Path" -> "Libraries and select Add External JARs", jonka jälkeen annetaan kirjaston polku.
+Jos kääntäjä antaa nullpointerexception-poikkeuksen, pitää projektiin asettaa Sqlite-kirjasto(lib/sqlite-jdbc-3.30.1.jar) IDE:ssä.
+-   IntelliJ:ssa tämä onnistuu painamalla valikosta File | Project Structure -> Libraries, jossa painetaan "+", jonka jälkeen annetaan kirjaston polku.
+-   Eclipsessä klikataan hiiren oikealla näppäimellä projectia ja painetaan kohtaa jossa lukee "Select Build Path".
+    Tämän jälkeen painetaan "Configure Build Path" -> "Libraries and select Add External JARs", jonka jälkeen annetaan kirjaston polku.
